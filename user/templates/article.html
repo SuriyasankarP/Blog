@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    <title>{{post.titleTag}} </title>
+{% endblock %}
+
+{% block content%}
+	<div>
+		<h1>{{post.title}}</h1>
+	<small>By : {{post.author}}</small><br>
+	<div style="padding-top: 5px;">
+		<small>Created at: {{post.post_date}}</small>
+		
+	</div>
+	{% if user.is_authenticated %}
+
+	<div style="padding-top: 5px;">
+		<small><a href="{% url 'update' post.pk%}">Edit Here</a></small>
+		
+	</div>
+	<div style="padding-top: 5px;">
+		<small><a href="{% url 'delete' post.pk%}">Click to delete</a></small>
+		
+	</div>
+
+	<hr>
+	{%endif%}
+
+	<hr>
+	<br>
+	{{post.body}}
+	<br><br>
+
+
+	<a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+	</div>
+	
+	
+
+	
+
+{% endblock %}
+
+

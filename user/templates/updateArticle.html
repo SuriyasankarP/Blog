@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% block title %}
+    <title>Update Blog Here....</title>
+{% endblock %}
+
+{% if user.is_authenticated %}
+
+
+<h1>Update Blog...</h1>
+
+<div class='form-group'>
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<br>
+		<a href="{% url 'update' post.pk%}"><button class="btn btn-success">Update</button></a>
+	</form>
+</div>
+
+{%else%}
+You Are Not Allowed to here...Please Login
+{%endif%}
+
+{% endblock %}

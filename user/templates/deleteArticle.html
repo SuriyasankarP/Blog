@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block content%}
+{% if user.is_authenticated %}
+
+{% block title %}
+    <title>Delete Your Blog</title>
+{% endblock %}
+
+
+<h1>Delete Blog </h1>
+<br>
+
+<div class='form-group'>
+	<form method="POST">
+		{% csrf_token %}
+		<blockquote>Are You Sure???</blockquote>
+		<br>
+		<button class="btn btn-danger" >Delete Post</button>
+	</form>
+</div>
+{%else%}
+
+You Are Not Allowed to here...Please Login 
+
+{%endif%}
+
+
+{% endblock %}
