@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post,Category
 
 class PostForm(forms.ModelForm):
 	class Meta:
@@ -10,5 +10,5 @@ class PostForm(forms.ModelForm):
 		'title' : forms.TextInput(attrs={'class': 'form-control'}),
 		'titleTag' : forms.TextInput(attrs={'class': 'form-control'}),
 		'author' : forms.Select(attrs={'class': 'form-control'}),
-		'body' : forms.Textarea(attrs={'class': 'form-control'}),
+		'body' : forms.Textarea(attrs={'class': 'form-control','placeholder' :'Must Be In HTML Format'}),
 		}

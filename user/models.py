@@ -5,6 +5,15 @@ from django.urls import reverse
 from datetime import date,datetime
 
 # Create your models here.
+class Category(models.Model):
+    name=models.CharField(max_length=255,default='uncategory')
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse ('home')
+
 
 class Post(models.Model):
     title=models.CharField(max_length=255)
@@ -13,7 +22,7 @@ class Post(models.Model):
     body=models.TextField()
     post_date=models.DateField(auto_now_add=True)
 
-    def __str__(self) :
+    def __str__(self):
         return self.title + " " + str(self.author)
     
     def get_absolute_url(self):
