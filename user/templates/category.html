@@ -5,22 +5,20 @@
     
 
 {% block content%}
-<h1> {{ post.category }} Category</h1>
-	
-		{% for post in object_list %}
+<h3> {{ cats }} Category</h3>
 
-		<a href="{% url 'article' post.pk%}">
+{% for post in category_post%}
+<a href="{% url 'article' post.pk%}">
 			<h4>{{post.title}}</h4>
 		</a>
 		<h6>By :
 		{{post.author}}
 		</h6>
-		<h6>category :
-		{{post.category}}
-		</h6>
+		
 		{{post.body|slice:":200"|safe}}
-		<hr>
-		{% endfor %}
+<hr>
+{% endfor %}
+
 
 
 {% endblock %}

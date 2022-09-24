@@ -2,13 +2,14 @@
 
 {% block content%}
 {% if user.is_authenticated %}
+{%if user.id == post.author.id%}
 
 {% block title %}
     <title>Delete Your Blog</title>
 {% endblock %}
 
 
-<h1>Delete Blog </h1>
+<h3>Delete Blog </h3>
 <br>
 
 <div class='form-group'>
@@ -19,6 +20,9 @@
 		<button class="btn btn-danger" >Delete Post</button>
 	</form>
 </div>
+{%else%}
+ <h2>You are Not Allow To Delete this!!!</h2>
+{%endif%}
 {%else%}
 
 You Are Not Allowed to here...Please Login 

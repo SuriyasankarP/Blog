@@ -4,6 +4,7 @@ from user.models import Post,Category
 from django.contrib import messages
 from .form import PostForm
 from django.urls import reverse_lazy
+from urllib import request
 
 class BlogView(ListView):
     model = Post
@@ -18,11 +19,16 @@ class ArticleView(DetailView):
     template_name='article.html'
 
 
-class CategoryView(ListView):
+"""class CategoryView(ListView):
+    #cats1=cats.replace('-',' ')
     model = Post
     template_name = 'category.html'
     def get_queryset(self):
-        return Post.objects.filter(category=self.kwargs.get('cats'),)
+        return Post.objects.filter(category=self.kwargs.get('cats'),)"""
+def CategoryView(request,cats):
+    
+    category_post=Post.objects.filter(category=cats.replace('-',' '))
+    return render (request,'category.html',{'cats' : cats,'category_post' : category_post})
 
 class AddArticle(CreateView):
     model=Post

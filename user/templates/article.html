@@ -6,13 +6,14 @@
 
 {% block content%}
 	<div>
-		<h1>{{post.title}}</h1>
+		<h3>{{post.title}}</h3>
 	<small>By : {{post.author}}</small><br>
 	<div style="padding-top: 5px;">
 		<small>Created at: {{post.post_date}}</small>
 		
 	</div>
 	{% if user.is_authenticated %}
+	{%if user.id == post.author.id%}
 
 	<div style="padding-top: 5px;">
 		<small><a href="{% url 'update' post.pk%}">Edit Here</a></small>
@@ -24,6 +25,7 @@
 	</div>
 
 	<hr>
+	{%endif%}
 	{%endif%}
 
 	<br>

@@ -8,7 +8,7 @@ from datetime import date,datetime
 
 # Create your models here.
 class Category(models.Model):
-    name=models.CharField(max_length=255,default='uncategory')
+    name=models.CharField(max_length=255,default='Uncategory')
 
     def __str__(self):
         return self.name
