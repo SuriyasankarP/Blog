@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import date,datetime
 
+
+
 # Create your models here.
 class Category(models.Model):
     name=models.CharField(max_length=255,default='uncategory')
@@ -19,6 +21,7 @@ class Post(models.Model):
     title=models.CharField(max_length=255)
     titleTag=models.CharField(max_length=255)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
+    category=models.TextField()
     body=models.TextField()
     post_date=models.DateField(auto_now_add=True)
 

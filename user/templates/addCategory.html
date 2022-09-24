@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% if user.is_authenticated %}
+
+{% block title %}
+
+    <title>Add Category Here....</title>
+{% endblock %}
+
+
+<h1>Add Post</h1>
+
+<div class='form-group'>
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<br>
+		<button class="btn btn-primary" >Add</button>
+	</form>
+</div>
+{%else%}
+You Are Not Allowed to here...Please Login
+{%endif%}
+
+
+{% endblock %}
