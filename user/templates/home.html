@@ -25,6 +25,9 @@
 		<h6>By :
 		{{post.author}}
 		</h6>
+		<h6> Category - <a href="{% url 'category' post.category|slugify%}">
+			{{post.category}}
+		</a></h6>
 		{{post.body|slice:":200"|safe}}
 <hr>
 {% endfor %}

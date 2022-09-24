@@ -1,0 +1,31 @@
+
+
+
+{% extends 'base.html'%}
+
+{% block content%}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Blog Category</title>
+</head>
+<body>
+
+	<h1>Categories</h1>
+	<hr>
+
+{% for i in object_list %}
+	<h6>
+		 <a href="{% url 'category' i|slugify%}">
+			{{i}}
+		</a>
+	</h6>
+{% endfor %}
+
+</body>
+</html>
+{% endblock %}
+

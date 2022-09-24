@@ -9,7 +9,10 @@ class BlogView(ListView):
     model = Post
     template_name='home.html'
     ordering=['-post_date']
-
+class CategoryListView(ListView):
+    model = Category
+    template_name='categorylist.html'
+    
 class ArticleView(DetailView):
     model =Post
     template_name='article.html'
