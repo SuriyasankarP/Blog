@@ -1,10 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from user.models import Post,Category
 from django.contrib import messages
 from .form import PostForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from urllib import request
+from django.http import HttpResponseRedirect
 
 class BlogView(ListView):
     model = Post
@@ -18,6 +19,20 @@ class ArticleView(DetailView):
     model =Post
     template_name='article.html'
 
+    def get_context_data(self,*args,**kwargs):
+        cat_menu=Category.objects.all()
+        context=super(ArticleView, self).get_context_data()
+        stuff =get_object_or_404(Post,id=self.kwargs['pk'])
+        
+
+        liked=False
+        if stuff.likes.filter(id=self.request.user.id).exists():
+            liked=True
+        context['liked']=liked
+
+        return context
+
+
 
 """class CategoryView(ListView):
     #cats1=cats.replace('-',' ')
@@ -27,7 +42,7 @@ class ArticleView(DetailView):
         return Post.objects.filter(category=self.kwargs.get('cats'),)"""
 def CategoryView(request,cats):
     
-    category_post=Post.objects.filter(category=cats.replace('-',' '))
+    category_post=Post.objects.filter(category=cats)
     return render (request,'category.html',{'cats' : cats,'category_post' : category_post})
 
 class AddArticle(CreateView):
@@ -49,6 +64,18 @@ class DeleteArticle(DeleteView):
     model=Post
     template_name='deleteArticle.html'
     success_url=reverse_lazy('home')
+
+def LikeView(request, pk):
+    #post=get_object_or_404(Post,id=kwargs['pk'])
+    post=Post.objects.get(id=pk)
+    liked=False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked=False
+    else:
+        post.likes.add(request.user)
+        liked=True
+    return HttpResponseRedirect(reverse('article',args=[str(pk)]))
 
 
 

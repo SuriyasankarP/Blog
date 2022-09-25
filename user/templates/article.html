@@ -31,10 +31,44 @@
 	<br>
 	{{post.body |safe}}
 	<br><br>
+	{% if user.is_authenticated %}
+	<div style="display: flex;" "justify-content: center;">
+		<div style="padding-top: 20px" >
+		<form method="POST" action="{%url 'like_post' post.pk %}">
 
 
-	<a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+			{% csrf_token %}
+			{% if liked %}
+			<button class="btn btn-primary btn-sm" , type="submit" , name='post_id',value="{{post.id}}">
+				DisLike 
+			</button>  
+			<!--<button type="submit" name="post_id" value="{{ post.id }}" class="btn {% if user in post.likes.all %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">Unlike</button> -->
+			{%else%}
+			<button class="btn btn-primary btn-sm" , type="submit" , name='post_id',value="{{post.id}}">
+				Like 
+			</button
+
+			{% endif %}
+			
+		</form>
 	</div>
+	{%endif%}
+	<br>
+	<div style="padding: 20px">
+		<p>{{post.total_like}} Likes</p>
+	</div>
+	
+	</div>
+	
+
+	<div style="display: flex; padding-top: 20px;">
+		<a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+	</div>
+
+	
+	</div>
+
+	
 	
 	
 
