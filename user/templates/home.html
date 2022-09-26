@@ -28,7 +28,7 @@
 		<h6> Category - <a href="{% url 'category' post.category%}">
 			{{post.category}}
 		</a></h6>
-		{{post.body|slice:":200"|safe}}
+		{{post.snippet|safe}}
 <hr>
 {% endfor %}
 

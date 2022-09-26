@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from user.models import Post,Category
 from django.contrib import messages
-from .form import PostForm
+from .form import PostForm,EditForm
 from django.urls import reverse_lazy,reverse
 from urllib import request
 from django.http import HttpResponseRedirect
@@ -58,7 +58,7 @@ class AddCategory(CreateView):
 class UpdateArticle(UpdateView):
     model=Post
     template_name='updateArticle.html'
-    form_class=PostForm
+    form_class=EditForm
     
 class DeleteArticle(DeleteView):
     model=Post
