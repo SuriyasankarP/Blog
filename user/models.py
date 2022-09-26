@@ -22,6 +22,7 @@ class Category(models.Model):
 class Post(models.Model):
     title=models.CharField(max_length=255)
     titleTag=models.CharField(max_length=255)
+    header_image=models.ImageField(null=True,blank=True,upload_to="images/")
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     snippet=models.TextField(max_length=255,default='Click link above to view post....')
     category=models.CharField(max_length=255,default='Uncategory')
