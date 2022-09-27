@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+{%load static%}
+
+{% block content%}
+
+{% block title %}
+    <title>Profile Page</title>
+{% endblock %}
+
+	<h1>Profile</h1>
+
+ <div class="card" style="width: 18rem;">
+ 
+  	{%if page_user.profile_pic%}
+    	<img class="card-img-top" src="{{page_user.profile_pic.url}}"></img>
+  	{%else%}
+    	<img class="card-img-top" src="{%static '/theblog/images/pic.png'%}"></img>
+    {%endif%}
+  <div class="card-body">
+    <h5 class="card-title">{{page_user.user.first_name}} {{page_user.user.last_name}}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+  	{% if page_user.facebook_url %}
+    <li class="list-group-item">
+    	<a href="{{page_user.facebook_url}}">
+        	<img src="{%static '/theblog/images/fb_ic.png'%}" width="30" height="30">
+		</a>
+
+	</li>
+	{%endif%}
+    {% if page_user.Instagram_url %}
+    <li class="list-group-item">
+    	<a href="{{page_user.Instagram_url}}">
+        			<img src="{%static '/theblog/images/in_ic.png'%}" width="30" height="30">
+		</a>
+
+	</li>
+	{%endif%}
+  </ul>
+  <div class="card-body">
+    {{page_user.bio}}
+  </div>
+</div>
+
+
+    
+
+
+
+{% endblock %}
