@@ -8,49 +8,16 @@
 
 	<div>
 		<h3>{{post.title}}</h3>
-	<small>By : </small><br>
-	
+	<small>By : </small><br><br>
 
-	<div class="card mb-3">
-  <div class="row no-gutters">
-
-    <div class="col-md-2">
-    	{%if post.author.profile.profile_pic%}
-    	<img class="card-img" src="{{post.author.profile.profile_pic.url}}"></img>
+	{%if post.author.profile.profile_pic%}
+    	<img class="rounded-circle" src="{{post.author.profile.profile_pic.url}}" width="100" height="100"></img>
     	{%else%}
-    	<img class="card-img" src="{%static '/theblog/images/pic.png'%}"></img>
-    	{%endif%}
-    </div>
-    
-    <div class="col-md-10">
-      <div class="card-body">
-        <h5 class="card-title">{{post.author.first_name}} {{post.author.last_name}}</h5>
-        <p class="card-text">
+    	<img class="rounded-circle" src="{%static '/theblog/images/pic.png'%}" width="100" height="100"></img>
+      {%endif%}<br><br>
+      <a href="{%url 'profile_page' user.profile.id %}">View Profile</a>
+  <br><br>
 
-        	<small class="text-muted">
-        		<a href="{%url 'profile_page' post.author.profile.id %}">View Profile |</a>
-        		{% if post.author.profile.facebook_url %}
-        		<a href="{{post.author.profile.facebook_url}}">
-        			<img src="{%static '/theblog/images/fb_ic.png'%}" width="30" height="30">
-				</a>
-        		{%endif%}
-        		{% if post.author.profile.Instagram_url %}
-        		<a href="{{post.author.profile.instagram_url}}">
-        			<img src="{%static '/theblog/images/in_ic.png'%}" width="30" height="30">
-        		</a>
-        		{%endif%}
-        	</small>
-    	</p>
-        <p class="card-text">{{post.author.profile.bio}}</p>
-        
-      </div>
-    </div>
-  </div>
-</div>
-	
-		
-	
-	
 	<div style="padding-top: 5px;">
 		<small>Created at: {{post.post_date}}</small>
 		
@@ -115,10 +82,15 @@
 	<br>
 
 {%if not post.comments.all %}
-No Comments yet <a href="{% url 'add_comment' post.pk%}"> Add One</a>
+No Comments yet 
+
+<a href="{% url 'add_comment' post.pk%}"> Add One</a>
+
 {%else%}
+
 <a href="{% url 'add_comment' post.pk%}"> Add Comment</a>
 <br><br>
+
 {% for comment in post.comments.all%}
 <b>{{comment.name}}</b>
 <b>{{comment.date_added}}</b>

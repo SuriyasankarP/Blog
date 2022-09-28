@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<h1>Posts</h1>
+	<h1>Posts...</h1>
 	<hr>
 
 {% for post in object_list %}
@@ -23,7 +23,7 @@
 			<h4>{{post.title}}</h4>
 		</a>
 		<h6>By :
-		{{post.author}}
+		{{post.author.first_name}}
 		</h6>
 		<h6> Category - <a href="{% url 'category' post.category%}">
 			{{post.category}}
