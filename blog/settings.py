@@ -10,13 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from django.utils import timezone
+
 from pathlib import Path
 import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -111,7 +112,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
+
+
+USE_L10N = True
+
 
 USE_I18N = True
 

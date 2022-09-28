@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
-from user.models import Post,Category
+from user.models import Post,Category,Comment
 from django.contrib import messages
-from .form import PostForm,EditForm
+from .form import PostForm,EditForm,PostCommentForm
 from django.urls import reverse_lazy,reverse
 from urllib import request
 from django.http import HttpResponseRedirect
@@ -77,6 +77,20 @@ def LikeView(request, pk):
         liked=True
     return HttpResponseRedirect(reverse('article',args=[str(pk)]))
 
+class AddCommentView(CreateView):
+    model=Comment
+    form_class=PostCommentForm
+    template_name='add_comments.html'
+    
+
+    def form_valid(self,form):
+        form.instance.post_id=self.kwargs['pk']
+        return super().form_valid(form)
+
+        
+
+    def get_success_url(self):
+        return reverse_lazy('article', kwargs={'pk': self.kwargs['pk']})
 
 
 

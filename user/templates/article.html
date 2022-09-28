@@ -106,8 +106,29 @@
 	<div style="padding: 20px">
 		<p>{{post.total_like}} Likes</p>
 	</div>
+
+
 	
 	</div>
+
+	<h3>Comments...</h3>
+	<br>
+
+{%if not post.comments.all %}
+No Comments yet <a href="{% url 'add_comment' post.pk%}"> Add One</a>
+{%else%}
+<a href="{% url 'add_comment' post.pk%}"> Add Comment</a>
+<br><br>
+{% for comment in post.comments.all%}
+<b>{{comment.name}}</b>
+<b>{{comment.date_added}}</b>
+<br>
+
+{{comment.comment}}<br><hr>
+{%endfor%}
+
+{%endif%}
+<br><br>
 
 	<div style="display: flex; padding-top: 20px;">
 		<a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
