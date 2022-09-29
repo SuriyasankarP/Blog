@@ -34,7 +34,6 @@ class EditForm(forms.ModelForm):
 		widgets ={
 		'title' : forms.TextInput(attrs={'class': 'form-control'}),
 		'titleTag' : forms.TextInput(attrs={'class': 'form-control'}),
-	
 		'category' : forms.Select(choices=choices_list,attrs={'class': 'form-control'}),
 		'snippet' : forms.Textarea(attrs={'class': 'form-control'}),
 		'body' : forms.Textarea(attrs={'class': 'form-control','placeholder' :'Must Be In HTML Format'}),
@@ -46,7 +45,7 @@ class PostCommentForm(forms.ModelForm):
 		fields=['name','comment']
 
 		widgets ={
-		'name' : forms.TextInput(attrs={'class': 'form-control'}),
 		'comment' : forms.Textarea(attrs={'class': 'form-control'}),
+		'name' : forms.TextInput(attrs={'class': 'form-control','value' : "",'id': "current" ,'type' : 'hidden'}),
 		
 		}

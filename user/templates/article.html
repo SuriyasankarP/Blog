@@ -8,30 +8,28 @@
 
 	<div>
 		<h3>{{post.title}}</h3>
-	<small>By : </small><br><br>
+		<small>By : </small><br><br>
 
-	{%if post.author.profile.profile_pic%}
-    	<img class="rounded-circle" src="{{post.author.profile.profile_pic.url}}" width="100" height="100"></img>
-    	{%else%}
-    	<img class="rounded-circle" src="{%static '/theblog/images/pic.png'%}" width="100" height="100"></img>
-      {%endif%}<br><br>
-      <a href="{%url 'profile_page' user.profile.id %}">View Profile</a>
-  <br><br>
+		{%if post.author.profile.profile_pic%}
+    		<img class="rounded-circle" src="{{post.author.profile.profile_pic.url}}" width="100" height="100"></img>
+    {%else%}
+    		<img class="rounded-circle" src="{%static '/theblog/images/pic.png'%}" width="100" height="100"></img>
+    {%endif%}
+    <br><br>
+      <a href="{%url 'profile_page' post.author.profile.id %}">View Profile</a>
+  	<br><br>
 
 	<div style="padding-top: 5px;">
 		<small>Created at: {{post.post_date}}</small>
-		
 	</div>
 	{% if user.is_authenticated %}
 	{%if user.id == post.author.id%}
 
-	<div style="padding-top: 5px;">
-		<small><a href="{% url 'update' post.pk%}">Edit Here</a></small>
-		
-	</div>
+		<div style="padding-top: 5px;">
+			<small><a href="{% url 'update' post.pk%}">Edit Here</a></small>
+		</div>
 	<div style="padding-top: 5px;">
 		<small><a href="{% url 'delete' post.pk%}">Click to delete</a></small>
-		
 	</div>
 
 	<hr>
@@ -70,25 +68,33 @@
 	</div>
 	{%endif%}
 	<br>
+	<hr>
 	<div style="padding: 20px">
 		<p>{{post.total_like}} Likes</p>
 	</div>
+	<hr>
 
 
 	
 	</div>
 
-	<h3>Comments...</h3>
+<h3>Comments...</h3><br>
+{% if not user.is_authenticated %}
+<p>Please Login Or Register to Add Commend </p>
+{%endif%}
 	<br>
-
 {%if not post.comments.all %}
 No Comments yet 
+{% if user.is_authenticated %}
 
 <a href="{% url 'add_comment' post.pk%}"> Add One</a>
-
 {%else%}
 
+{%endif%}
+{%else%}
+{% if user.is_authenticated %}
 <a href="{% url 'add_comment' post.pk%}"> Add Comment</a>
+{%endif%}
 <br><br>
 
 {% for comment in post.comments.all%}
@@ -96,10 +102,19 @@ No Comments yet
 <b>{{comment.date_added}}</b>
 <br>
 
-{{comment.comment}}<br><hr>
+{{comment.comment}}<br>
+{% if user.is_authenticated %}
+{%if user.id == post.author.id%}
+<a href="{% url 'delete_comment' post.pk%}"> delete Comment</a>
+{%endif%}
+{%endif%}
+<hr>
+
 {%endfor%}
 
 {%endif%}
+
+
 <br><br>
 
 	<div style="display: flex; padding-top: 20px;">

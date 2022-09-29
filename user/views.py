@@ -5,6 +5,7 @@ from django.contrib import messages
 from .form import PostForm,EditForm,PostCommentForm
 from django.urls import reverse_lazy,reverse
 from urllib import request
+from datetime import date,datetime
 from django.http import HttpResponseRedirect
 
 class BlogView(ListView):
@@ -87,11 +88,42 @@ class AddCommentView(CreateView):
         form.instance.post_id=self.kwargs['pk']
         return super().form_valid(form)
 
-        
-
     def get_success_url(self):
         return reverse_lazy('article', kwargs={'pk': self.kwargs['pk']})
 
+"""def AddCommentView(request,pk):
+    post=Post.objects.get(id=pk)
+    user_name=User.objects.get(id=pk)
 
+
+    form=PostCommentForm(instance=post)
+
+    if request.method=='POST':
+        form=PostCommentForm(request.POST, instance=post)
+        if form.is_valid():
+            name=user_name
+            body=form.cleaned_data['comment']
+            c =Comment(post=post,name=name,comments=body,date_added=datetime)
+            c.save()
+
+            return redirect('article',pk=pk)
+
+        else:
+            print("form is invalid")    
+    else:
+        form=PostCommentForm()
+
+    context={
+    'form' : form
+    }
+
+    return render(request,'add_comments.html',context) """
+
+
+
+def delete_comment(request,pk):
+    comment= Comment.objects.filter(post=pk)
+    comment.delete()
+    return redirect('article',pk=pk)
 
 
